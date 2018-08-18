@@ -1,5 +1,6 @@
 import mysql.connector
 from api import voicekit
+import os
 
 cnx = mysql.connector.connect(user='joe83830', password='123123',
                               host='140.113.144.78',
@@ -29,30 +30,29 @@ def create_store_entry(name):
              "dish VARCHAR (75)," \
              "path VARCHAR (255)," \
              "rank INTEGER (10)," \
-             "storeID INT," \
+             "storeID INTEGER (10)," \
+             "weekrank INTEGER (10)," \
              "FOREIGN KEY (storeID) REFERENCES DJH.store_list(storeID)," \
              "UNIQUE (dish)," \
-             "UNIQUE (rank)," \
              "PRIMARY KEY (foodID)) ENGINE=INNODB;".format(name)
 
     cursor.execute(query1)
     cursor.execute(query2)
     cnx.commit()
 
-def create_audio(name):
-
-    query = "SELECT 'foodID' FROM DJH.{} WHERE "
-
 
 def create_menu(store, menu):
 
+    os.makedirs('./audio/{}'.format(store))
+
     for ele in menu:
 
-        path = './audio/{}.mp3'.format(ele)
+        path = './audio/{}/{}.mp3'.format(store, ele)
         voicekit.generate_audio(ele, path)
 
-        query = "INSERT IGNORE INTO DJH.{} (dish, path)" \
-                "VALUES (\'{}\', \'{}\');".format(store, ele, path)
+        query = "INSERT IGNORE INTO DJH.{} (dish, path, weekrank, rank) " \
+                "VALUES (\'{}\', \'{}\', -1, -1);".format(store, ele, path)
 
+        print(query)
         cursor.execute(query)
         cnx.commit()

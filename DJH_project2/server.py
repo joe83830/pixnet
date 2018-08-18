@@ -34,6 +34,14 @@ def post_store_menu():
     return json.dumps(content, ensure_ascii=False)
 
 
+@app.route('/menu', methods=['POST'])
+def populate_menu():
+    content = json.loads(request.data)
+    db.create_menu(content['store'], content['menu'])
+
+    return json.dumps(content, ensure_ascii=False)
+
+
 @app.route('/getfile/<path:filename>', methods=['GET'])
 def download_file(filename):
     return send_from_directory('./',

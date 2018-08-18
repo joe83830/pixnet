@@ -28,10 +28,8 @@
 <!--===============================================================================================-->
 	<script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript">
-
 		$(document).ready(function() {
             $("#submit").click(function () {
-
                 $.ajax({
                     url: "/storename",
                     type: "POST",
@@ -46,12 +44,9 @@
                     contentType: "application/json",
                     dataType: "json"
                 });
-
                 alert($("#storename").val())
             });
         });
-
-
 	</script>
 </head>
 <body>
@@ -130,7 +125,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-23581568-13');
 </script>
 

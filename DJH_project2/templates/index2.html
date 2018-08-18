@@ -30,14 +30,17 @@
 	<script>
 
         $(document).ready(function() {
+
             $("#submit").click(function () {
 
+				var foodlist = [$("#food1").val(), $("#food2").val(), $("#food3").val()]
+				console.log(foodlist)
                 $.ajax({
-                    url: "/storename",
+                    url: "/menu",
                     type: "POST",
-                    data: JSON.stringify({"store": $("#storename").val()}),
+                    data: JSON.stringify({"store": localStorage.getItem("restaurant"), "menu":foodlist}),
                     success: function (data) {
-                        document.location.href = "/result";
+                        alert("SUCCESS")
                     },
                      error: function() {
                         console.log("ERROR")
@@ -66,19 +69,19 @@
 				</span>
 
 				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<input class="input100" type="text" id="storename" placeholder="第一道菜">
+					<input class="input100" type="text" id="food1" placeholder="第一道菜">
 					<span class="focus-input100-1"></span>
 					<span class="focus-input100-2"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<input class="input100" type="text" name="email" placeholder="第二道菜">
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<input class="input100" type="text" id="food2" placeholder="第二道菜">
 					<span class="focus-input100-1"></span>
 					<span class="focus-input100-2"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<input class="input100" type="text" name="email" placeholder="第三道菜">
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<input class="input100" type="text" id="food3" placeholder="第三道菜">
 					<span class="focus-input100-1"></span>
 					<span class="focus-input100-2"></span>
 				</div>
