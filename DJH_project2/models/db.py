@@ -43,7 +43,7 @@ def create_store_entry(name):
 
 def create_menu(store, menu):
     dir_name = './audio/{}'.format(store)
-    if !os.path.exist(dir_name):
+    if not os.path.exists(dir_name):
         os.makedirs(dir_name)
 
     for ele in menu:
