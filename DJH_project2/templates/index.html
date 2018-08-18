@@ -36,6 +36,7 @@
                     data: JSON.stringify({"store": $("#storename").val()}),
                     success: function (data) {
 						console.log("success")
+						localStorage.setItem("restaurant", $("#storename").val())
 						document.location.href = "/secondpage";
                     },
 					 error: function() {
